@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIT Healthcare Services</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="services.css" />
+  <!-- Link to external JS file -->
+  <script src="services.js" defer></script>
+  <style>
+    /* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+/* Body styling */
+body {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 20px;
+  flex-direction: column;
+  overflow: hidden;
+  background: #F1F1F1; /* Soft gradient */
+  font-family: 'Poppins', sans-serif; 
+}
+/* Header */
+.header {
+  background: linear-gradient(to right, #0f4c75,#3282B8);
+  width: 100%;
+  padding: 2rem 0; /* Increased vertical padding */
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Header Title */
+.header h1 {
+  color: rgb(241, 240, 240);
+  font-size: 50px; /* Unified font size */
+  margin: 0;
+}
+/* Header Subtext */
+.header span {
+  font-size: 22px;
+  opacity: 0.9;
+}
+/* Main Title */
+.title {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 40px;
+  color: #5a2a0c;
+  margin-top: -10px; 
+}
+/* Container for services */
+.services-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 500px;
+  width: 80%;
+  max-width: 900px;
+  padding-bottom: 40px; /* Adds space below all buttons */
+}
+/* Ensure services are in a row */
+.left-services {
+  display: flex;
+  flex-direction: row; /* Keep items in a row */
+  justify-content: center; /* Center the boxes */
+  align-items: center;
+  gap: 40px; /* More spacing between boxes */
+  flex-wrap: nowrap; /* Keep them in a single row */
+  width: 100%;
+  margin-top: 50px; /* Moves the section down */
+  
+}
+.service-button {
+  width: 300px; /* Increase width */
+  height: 200px; /* Increase height */
+  font-size: 18px; /* Make text larger */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: lightgray;
+  text-decoration: none;
+  color: black;
+  border: solid brown;
+}
+/* Ensure responsiveness */
+
+.service-button:hover {
+  border: 3px solid #000;
+}
+/* Colored bars on the left side */
+/* Go Back Button */
+/* .back-button {
+  padding: 12px 24px;
+  background-color:#0F4C75;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+} */
+/* .back-button:hover {
+  opacity: 0.9;
+} */
+/* Ensures both sections end together */
+.service-button,
+.info-button {
+  flex-grow: 1; /* Makes sure all elements stretch equally */
+}
+/* Media queries for responsiveness */
+
+/* Service Button Hover Effect (Keeps Colored Top Border) */
+.service-button:hover {
+  border: 3px solid #000; 
+   /* Keeps the existing top border size */
+  box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.2); /* Shadow above */
+  transform: translateY(-3px); /* Slightly moves button up */
+}
+/* Go Back Button Hover Effect */
+/* .back-button:hover {
+  opacity: 0.9;
+  box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+} */
+
+.service-image {
+  width: 60px;
+  height: 60px;
+}
+
+.service-box:hover {
+  transform: scale(1.05);
+}
+.service-box {
+  display: flex;
+  align-items: center; /* Vertically centers content */
+  justify-content: flex-start; /* Aligns content to the left */
+  width: 300px; 
+  height: 100px;
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  border: 2px solid #ccc;
+  gap: 15px; /* Adds spacing between image & text */
+}
+.service-box span {
+  flex: 1; /* Allows text to take available space */
+  text-align: left; /* Aligns text to the left */
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  display: flex;
+  align-items: center; /* Ensures vertical centering */
+}
+.button {
+  margin-top: 50px; /* Increase this value to move it further down */
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+}
+@media (max-width: 480px) {
+  .header h1 {
+      font-size: 20px;
+  }
+  .title {
+      font-size: 24px;
+  }
+  .service-button,
+  .info-button,
+  .back-button {
+      width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .services-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+  .left-services, .right-services {
+      align-items: center;
+      width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .left-services {
+    flex-direction: column; /* Stack them on smaller screens */
+    align-items: center;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <h1>VIT <span>(Vellore Campus)</span></h1>
+    </div>
+  </header>
+
+  <div style="margin-top: 30px;">
+    <h2 class="title">Choose your Service</h2>
+  </div>
+
+  <div class="services-container">
+    <div class="left-services">
+      <div class="service-box">
+        <img src="efkj.jpg" alt="Doctor" class="service-image">
+        <span>Know about our Doctor</span>
+      </div>
+  
+      <div class="service-box">
+        <img src="scheduling.jpg" alt="Session" class="service-image">
+        <span>Book a Session</span>
+      </div>
+  
+      <div class="service-box">
+        <img src="phone.jpg" alt="Ambulance" class="service-image">
+        <span>Call an Ambulance</span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+</body>
+</html>
