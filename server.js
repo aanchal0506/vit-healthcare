@@ -4,15 +4,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 
-
 const { Student, Doctor, Ambulance } = require("./schema");
 
 const app = express();
 const PORT = 5000;
-app.use(cors());
+
 // Middleware
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,32 +21,60 @@ mongoose.connect("mongodb://127.0.0.1:27017/vit_health", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.error(err));
+.then(() => console.log("✅ MongoDB Connected"))
+.catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // ROUTES
 
 // Serve Pages
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "login.html"));
+    res.sendFile(path.join(__dirname, "landing.html"));
 });
 
 app.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "signuppage.html"));
 });
 
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "login.html"));
+});
+
 app.get("/doctor-info", (req, res) => {
     res.sendFile(path.join(__dirname, "doctorinfo.html"));
 });
 
+// ====================== API ROUTES ====================== //
+
 // Get doctor by name
 app.get('/getDoctor', async (req, res) => {
     const { name } = req.query;
-    const doctor = await Doctor.findOne({ name: new RegExp(name, 'i') });
-    res.json(doctor || {});
+    try {
+        const doctor = await Doctor.findOne({ name: new RegExp(name, 'i') });
+        res.json(doctor || {});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 
+// Live Doctor Suggestions (AJAX)
+app.get('/suggestDoctors', async (req, res) => {
+    const query = req.query.name;
+    if (!query || query.length < 3) {
+        return res.json([]);
+    }
 
+    try {
+        const regex = new RegExp(query, 'i');
+        const doctors = await Doctor.find({ name: regex }).limit(5);
+        const names = doctors.map(doc => doc.name);
+        console.log("Suggestions for:", query, "=>", names);
+        res.json(names);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 // Student Signup
 app.post("/students/signup", async (req, res) => {
@@ -61,21 +88,6 @@ app.post("/students/signup", async (req, res) => {
         const newStudent = new Student(req.body);
         await newStudent.save();
         res.status(201).json({ message: "Student registered successfully", student: newStudent });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Student Login
-app.post("/students/login", async (req, res) => {
-    try {
-        const { registrationNumber, password } = req.body;
-        const student = await Student.findOne({ registrationNumber });
-
-        if (!student) return res.status(404).json({ message: "Student not found" });
-        if (student.password !== password) return res.status(401).json({ message: "Invalid password" });
-
-        res.status(200).json({ message: "Login successful", student });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -97,8 +109,6 @@ app.put("/students/update/:regNo", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-
 
 // Book a Doctor Session
 app.post("/doctors/book", async (req, res) => {
@@ -147,25 +157,8 @@ app.post("/ambulances/book", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-app.get('/suggestDoctors', async (req, res) => {
-    const query = req.query.name;
-    if (!query || query.length < 3) {
-        return res.json([]);
-    }
 
-    try {
-        const regex = new RegExp(query, 'i');
-        const doctors = await Doctor.find({ name: regex }).limit(5);
-        const names = doctors.map(doc => doc.name);
-        res.json(names);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
-
-// Start Server
+// ====================== Start Server ====================== //
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running at: http://localhost:${PORT}`);
 });
