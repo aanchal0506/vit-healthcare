@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Search & Storage</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
        * {
             box-sizing: border-box;
@@ -25,7 +24,6 @@
             font-family: 'Poppins', sans-serif; 
         }
 
-        /* Header */
         .header {
             background: linear-gradient(to right, #0f4c75, #3282B8);
             width: 100%;
@@ -42,7 +40,6 @@
             z-index: 1;
         }
 
-        /* Header Title */
         .header h1 {
             color: rgb(241, 240, 240);
             font-size: 45px;
@@ -50,17 +47,15 @@
             font-weight: 600;
         }
 
-        /* Header Subtext */
         .header span {
             font-size: 20px;
             opacity: 0.9;
             font-weight: 400;
         }
 
-        /* Main Content Styling */
         .container {
             padding: 20px;
-            margin-top: 40px; /* Reduced margin-top to reduce space between search and doctor's info */
+            margin-top: 40px;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -68,18 +63,16 @@
             max-width: 600px;
         }
 
-        /* Doctor's Information as a heading inside a div */
         .info-heading {
             text-align: center;
             font-size: 40px;
             font-weight: 700;
-            color: black; /* Changed to black color */
-            margin-top: 30px; /* Reduced top margin */
-            margin-bottom: 20px; /* Reduced bottom margin */
+            color: black;
+            margin-top: 30px;
+            margin-bottom: 20px;
             letter-spacing: 1px;
         }
 
-        /* Search Doctor Form */
         .search-form {
             text-align: center;
         }
@@ -123,7 +116,6 @@
             background-color: #0f4c75;
         }
 
-        /* Doctor Details Styling */
         .doctor-details {
             margin-top: 20px;
             display: none;
@@ -145,20 +137,17 @@
         <h1>VIT <span>(Vellore Campus)</span></h1>
     </div>
 
-    <!-- Doctor's Information Heading in a div -->
     <div class="info-heading">
         Doctor's Information
     </div>
 
     <div class="container">
-        <!-- Search Doctor Form -->
         <div class="search-form">
             <h4>Search the Doctor</h4>
             <input type="text" id="searchName" placeholder="Enter Doctor's Name">
             <button onclick="searchDoctor()">Search</button>
         </div>
 
-        <!-- Doctor Details -->
         <div class="doctor-details" id="doctorDetails">
             <h4>Doctor Information</h4>
             <p><strong>Name:</strong> <span id="docName"></span></p>
@@ -172,29 +161,32 @@
     </div>
 
     <script>
-        // Function to Search Doctor
         function searchDoctor() {
             const name = document.getElementById("searchName").value;
-
-            axios.get(`http://localhost:5000/getDoctor?name=${name}`)
-                .then(response => {
-                    const doctor = response.data;
-                    if (!doctor) {
-                        alert("Doctor not found!");
-                        return;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `http://localhost:5000/getDoctor?name=${encodeURIComponent(name)}`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const doctor = JSON.parse(xhr.responseText);
+                        if (!doctor || Object.keys(doctor).length === 0) {
+                            alert("Doctor not found!");
+                            return;
+                        }
+                        document.getElementById("docName").innerText = doctor.name;
+                        document.getElementById("docAge").innerText = doctor.age;
+                        document.getElementById("docGender").innerText = doctor.gender;
+                        document.getElementById("docSpecialization").innerText = doctor.specialization;
+                        document.getElementById("docExperience").innerText = doctor.experience;
+                        document.getElementById("docDays").innerText = doctor.days;
+                        document.getElementById("docHours").innerText = doctor.hours;
+                        document.getElementById("doctorDetails").style.display = "block";
+                    } else {
+                        alert("Error fetching doctor information.");
                     }
-
-                    document.getElementById("docName").innerText = doctor.name;
-                    document.getElementById("docAge").innerText = doctor.age;
-                    document.getElementById("docGender").innerText = doctor.gender;
-                    document.getElementById("docSpecialization").innerText = doctor.specialization;
-                    document.getElementById("docExperience").innerText = doctor.experience;
-                    document.getElementById("docDays").innerText = doctor.days;
-                    document.getElementById("docHours").innerText = doctor.hours;
-
-                    document.getElementById("doctorDetails").style.display = "block";
-                })
-                .catch(error => alert("Error: " + error));
+                }
+            };
+            xhr.send();
         }
     </script>
 </body>
