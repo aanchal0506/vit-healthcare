@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Search & Storage</title>
     <style>
-       * {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
         }
+
         body {
             display: flex;
             justify-content: center;
@@ -21,7 +23,6 @@
             flex-direction: column;
             overflow: hidden;
             background: #F1F1F1;
-            font-family: 'Poppins', sans-serif; 
         }
 
         .header {
@@ -75,7 +76,6 @@
 
         .search-form {
             text-align: center;
-            position: relative;
         }
 
         .search-form h4 {
@@ -98,29 +98,6 @@
         input[type="text"]:focus {
             border-color: #3282B8;
             box-shadow: 0 0 5px rgba(50, 130, 184, 0.5);
-        }
-
-        ul#suggestions {
-            list-style: none;
-            padding: 0;
-            margin: -5px 0 10px 0;
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            background-color: white;
-            position: absolute;
-            width: 100%;
-            z-index: 10;
-            display: none;
-        }
-
-        ul#suggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        ul#suggestions li:hover {
-            background-color: #f0f0f0;
         }
 
         button {
@@ -168,9 +145,10 @@
     <div class="container">
         <div class="search-form">
             <h4>Search the Doctor</h4>
-            <input type="text" id="searchName" placeholder="Enter Doctor's Name" autocomplete="off" oninput="suggestDoctors()" />
-            <ul id="suggestions"></ul>
+            <input type="text" id="searchName" placeholder="Enter Doctor's Name" list="suggestions">
+            <datalist id="suggestions"></datalist>
             <button onclick="searchDoctor()">Search</button>
+            <button onclick="searchDoctor()">Back to services</button>
         </div>
 
         <div class="doctor-details" id="doctorDetails">
@@ -186,46 +164,16 @@
     </div>
 
     <script>
-        function suggestDoctors() {
-            const name = document.getElementById("searchName").value;
-            const suggestionList = document.getElementById("suggestions");
-
-            if (name.length === 0) {
-                suggestionList.style.display = "none";
-                return;
-            }
-
-            fetch(`http://localhost:5000/suggestDoctors?query=${encodeURIComponent(name)}`)
-                .then(res => res.json())
-                .then(data => {
-                    suggestionList.innerHTML = "";
-                    if (data.length === 0) {
-                        suggestionList.style.display = "none";
-                        return;
-                    }
-
-                    data.forEach(doc => {
-                        const li = document.createElement("li");
-                        li.textContent = doc;
-                        li.onclick = () => {
-                            document.getElementById("searchName").value = doc;
-                            suggestionList.style.display = "none";
-                            searchDoctor(); // Auto-fetch on selection
-                        };
-                        suggestionList.appendChild(li);
-                    });
-                    suggestionList.style.display = "block";
-                })
-                .catch(err => {
-                    console.error("Error fetching suggestions:", err);
-                    suggestionList.style.display = "none";
-                });
-        }
-
         function searchDoctor() {
             const name = document.getElementById("searchName").value;
+
             fetch(`http://localhost:5000/getDoctor?name=${encodeURIComponent(name)}`)
-                .then(res => res.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
                 .then(doctor => {
                     if (!doctor || Object.keys(doctor).length === 0) {
                         alert("Doctor not found!");
@@ -240,11 +188,44 @@
                     document.getElementById("docHours").innerText = doctor.hours;
                     document.getElementById("doctorDetails").style.display = "block";
                 })
-                .catch(err => {
-                    console.error("Error fetching doctor info:", err);
+                .catch(error => {
+                    console.error("Fetch error:", error);
                     alert("Error fetching doctor information.");
                 });
         }
+
+        // Suggestion logic using AJAX
+        document.getElementById("searchName").addEventListener("input", function () {
+            const inputVal = this.value;
+            const suggestionBox = document.getElementById("suggestions");
+
+            if (inputVal.length < 3) {
+                suggestionBox.innerHTML = "";
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `http://localhost:5000/suggestDoctors?name=${encodeURIComponent(inputVal)}`, true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const suggestions = JSON.parse(xhr.responseText);
+                    suggestionBox.innerHTML = ""; // Clear old suggestions
+                    suggestions.forEach(name => {
+                        const option = document.createElement("option");
+                        option.value = name;
+                        suggestionBox.appendChild(option);
+                    });
+                }
+            };
+
+            xhr.onerror = function () {
+                console.error("Error fetching suggestions.");
+            };
+
+            xhr.send();
+        });
     </script>
 </body>
+
 </html>
