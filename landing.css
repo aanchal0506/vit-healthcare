@@ -1,0 +1,635 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #F1F1F1;
+    --secondary-color: #BBE1FA;
+    --accent-color: #3282B8;
+    --dark-color: #1B262C;
+    --light-color: #0F4C75;
+    --success-color: #3282B8;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F1F1;
+    color: #1B262C;
+    background-image: linear-gradient(135deg, #F1F1F1 0%, #BBE1FA 100%);
+}
+
+header {
+    background-color: #0F4C75;
+    color: white;
+    padding: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container:hover .logo-img {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #BBE1FA, #0F4C75);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2.5rem;
+    position: relative;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    padding: 0.5rem 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #BBE1FA;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #BBE1FA;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.section {
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 0 2rem;
+}
+
+.main-container {
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    color: #0F4C75;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    color: #0F4C75;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(45deg, #0F4C75, #BBE1FA);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+main p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #555;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+}
+
+.button {
+    padding: 1rem 3.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    z-index: -1;
+}
+
+.button:hover::before {
+    width: 100%;
+}
+
+.button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.fresher-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: white;
+}
+
+.senior-btn {
+    background: linear-gradient(45deg, var(--secondary-color), var(--success-color));
+    color: white;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    top: -100px;
+    left: -100px;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    bottom: -50px;
+    right: 100px;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: var(--success-color);
+    top: 100px;
+    right: -50px;
+}
+
+/* About Section */
+.about-section {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.about-content {
+    text-align: left;
+}
+
+.about-content h2 {
+    text-align: left;
+}
+
+.about-content h2::after {
+    left: 0;
+    transform: none;
+}
+
+.about-content p {
+    text-align: left;
+    margin-left: 0;
+}
+
+.about-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Motto Section */
+.motto-section {
+    background: linear-gradient(135deg, var(--dark-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.motto-section h2 {
+    color: white;
+}
+
+.motto-section h2::after {
+    background: linear-gradient(45deg, var(--accent-color), var(--success-color));
+}
+
+.motto-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.motto-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.motto-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.motto-card:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.motto-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.motto-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.motto-card p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Team Section */
+.team-section {
+    background-color: var(--light-color);
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.team-member {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.member-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.team-member:hover .member-image img {
+    transform: scale(1.1);
+}
+
+.member-info {
+    padding: 1.5rem;
+}
+
+.member-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.member-info p {
+    color: #777;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-content,
+    .about-content h2 {
+        text-align: center;
+    }
+
+    .about-content h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+    }
+
+    nav ul li {
+        margin-left: 0;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    main p {
+        max-width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .button {
+        width: 80%;
+    }
+
+    .main-container {
+        padding: 2rem;
+    }
+
+    .section {
+        padding: 3rem 1.5rem;
+    }
+
+    .team-grid,
+    .motto-cards {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Dynamic background and text color change on scroll */
+@keyframes gradientScroll {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+/* Add scroll event handler script */
+@media (min-width: 100px) {
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: linear-gradient(to bottom, 
+            rgba(255, 255, 255, 0) 0%,
+            rgba(187, 225, 250, 0) 30%, 
+            rgba(27, 38, 44, 0) 100%);
+        z-index: -1;
+        opacity: 0.5;
+    }
+}
+
+/* Include this in a script tag in your HTML file or create a separate JS file */
+/* 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', function() {
+        // Calculate scroll percentage
+        const scrollPosition = window.scrollY;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollPercentage = (scrollPosition / maxScroll) * 100;
+        
+        // Update CSS variable for background position
+        document.documentElement.style.setProperty('--scroll-position', scrollPercentage + '%');
+        
+        // Dynamically change text color based on scroll position
+        if (scrollPercentage < 30) {
+            document.documentElement.style.setProperty('--text-color', '#1B262C');
+        } else if (scrollPercentage < 70) {
+            document.documentElement.style.setProperty('--text-color', '#F1F1F1');
+        } else {
+            document.documentElement.style.setProperty('--text-color', '#FFFFFF');
+        }
+    });
+});
+</script>
+*/
+
+.gradient-container {
+    min-height: 100vh;
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,    /* White at top */
+        #4a90e2 50%,   /* Blue in middle */
+        #000000 100%   /* Black at bottom */
+    );
+    background-attachment: fixed;
+    position: relative;
+}
+
+.content-section {
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.text-content {
+    transition: color 0.3s ease;
+    padding: 2rem;
+}
+
+/* Optional: Add parallax class styles */
+.parallax {
+    position: relative;
+    will-change: transform;
+} 
