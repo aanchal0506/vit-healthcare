@@ -97,11 +97,15 @@
 
     // Serve Pages
     app.get("/", (req, res) => {
-        res.sendFile(path.join(__dirname, "login.html"));
+        res.sendFile(path.join(__dirname, "landing.html"));
     });
 
     app.get("/signup", (req, res) => {
         res.sendFile(path.join(__dirname, "signuppage.html"));
+    });
+
+    app.get("/login", (req, res) => {
+        res.sendFile(path.join(__dirname, "login.html"));
     });
 
     // Student Signup
