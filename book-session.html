@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIT Healthcare - Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F1F1F1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 140px 20px 20px; /* 140px = 100px header + 40px space */
+      height: 100%;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(to right, #0f4c75, #3282B8);
+      width: 100%;
+      padding: 2rem 0;
+      color: white;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .header h1 {
+      color: rgb(241, 240, 240);
+      font-size: 50px;
+      margin: 0;
+    }
+
+    .header span {
+      font-size: 22px;
+      opacity: 0.9;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      margin: 0 auto 20px auto;
+    }
+
+    .container h2 {
+      color: #1B262C;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label {
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #3282B8;
+      border-radius: 6px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    select {
+      opacity: 0.6;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0F4C75;
+      color: #BBE1FA;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #03273f;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #0a3553;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 480px) {
+      .container {
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .header {
+        padding: 8px;
+        font-size: 18px;
+      }
+
+      .header h1 {
+        font-size: 18px;
+      }
+
+      .header span {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 10px;
+        font-size: 22px;
+      }
+
+      .header h1 {
+        font-size: 38px;
+      }
+    }
+
+    @media (max-width: 425px) {
+      .header {
+        padding: 10px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <h1>VIT <span>(Vellore Campus)</span></h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>VIT HEALTHCARE</h2>
+    <form id="signupForm">
+      <label for="fullname">Enter your name:</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required />
+
+      <label for="register_number">Enter your registration number:</label>
+      <input type="text" id="register_number" name="register_number" placeholder="Enter your registration number" required />
+
+      <label for="mobile">Enter your mobile number:</label>
+      <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required />
+
+      <label for="hostel_block">Select your hostel block:</label>
+      <select id="hostel_block" name="hostel_block" required>
+        <option value="">Select</option>
+        <option value="A-T Men's Hostel">A Men's Hostel</option>
+        <option value="A-T Men's Hostel">B Men's Hostel</option>
+        <option value="A-T Men's Hostel">C Men's Hostel</option>
+        <option value="A-T Men's Hostel">D Men's Hostel</option>
+        <option value="A-T Men's Hostel">E Men's Hostel</option>
+        <option value="A-T Men's Hostel">F Men's Hostel</option>
+        <option value="A-T Men's Hostel">G Men's Hostel</option>
+        <option value="A-T Men's Hostel">H Men's Hostel</option>
+        <option value="A-T Men's Hostel">J Men's Hostel</option>
+        <option value="A-T Men's Hostel">K Men's Hostel</option>
+        <option value="A-T Men's Hostel">L Men's Hostel</option>
+        <option value="A-T Men's Hostel">M Men's Hostel</option>
+        <option value="A-T Men's Hostel">N Men's Hostel</option>
+        <option value="A-T Men's Hostel">P Men's Hostel</option>
+        <option value="A-T Men's Hostel">Q Men's Hostel</option>
+        <option value="A-T Men's Hostel">R Men's Hostel</option>
+        <option value="A-T Men's Hostel">S Men's Hostel</option>
+        <option value="A-T Men's Hostel">T Men's Hostel</option>
+        <option value="A-T Men's Hostel">A Women's Hostel</option>
+        <option value="A-T Men's Hostel">B Women's Hostel</option>
+        <option value="A-T Men's Hostel">C Women's Hostel</option>
+        <option value="A-T Men's Hostel">D Women's Hostel</option>
+        <option value="A-T Men's Hostel">E Women's Hostel</option>
+        <option value="A-T Men's Hostel">F Women's Hostel</option>
+        <option value="A-T Men's Hostel">G Women's Hostel</option>
+        <option value="A-T Men's Hostel">H Women's Hostel</option>
+        <option value="A-T Men's Hostel">J Women's Hostel</option>
+      </select>
+
+      <label for="gender">Select your gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="age">Enter your age:</label>
+      <input type="number" id="age" name="age" placeholder="Enter your age" required />
+
+      <label for="timeslot">Select your time slot:</label>
+      <select id="timeslot" name="timeslot" required>
+        <option value="">Select</option>
+        <option value="Morning">4:00pm-6:00pm</option>
+        
+      </select>
+
+      <label for="email">Enter your email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="/">Login here</a></p>
+  </div>
+
+  <script src="signup.js"></script>
+</body>
+
+</html>
