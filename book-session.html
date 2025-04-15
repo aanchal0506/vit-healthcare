@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VIT Healthcare - Sign Up</title>
-  <link rel="stylesheet" href="signup.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     /* Reset and Base Styles */
     * {
@@ -189,18 +189,18 @@
   <div class="container">
     <h2>VIT HEALTHCARE</h2> 
   
-    <form id="signupForm">
-      <label for="fullname">Enter your name:</label>
-      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required />
+    <form id="booksession">
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required />
 
-      <label for="register_number">Enter your registration number:</label>
-      <input type="text" id="register_number" name="register_number" placeholder="Enter your registration number" required />
+      <label for="registeNumber">Enter your registration number:</label>
+      <input type="text" id="registerNumber" name="registerNumber" placeholder="Enter your registration number" required />
 
       <label for="mobile">Enter your mobile number:</label>
       <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required />
 
-      <label for="hostel_block">Select your hostel block:</label>
-      <select id="hostel_block" name="hostel_block" required>
+      <label for="hostelBlock">Select your hostel block:</label>
+      <select id="hostelBlock" name="hostelBlock" required>
         <option value="">Select</option>
         <option value="A-T Men's Hostel">A Men's Hostel</option>
         <option value="A-T Men's Hostel">B Men's Hostel</option>
@@ -245,7 +245,7 @@
       <label for="timeslot">Select your time slot:</label>
       <select id="timeslot" name="timeslot" required>
         <option value="">Select</option>
-        <option value="Morning">4:00pm-6:00pm</option>
+        <option value="Morning">6:00pm-8:00pm</option>
       </select>
 
       <label for="email">Enter your email:</label>
@@ -255,7 +255,82 @@
       <button onclick="window.location.href='/service'">Back to Services</button>
     </form>
   </div>
+  <script>
+    $(document).ready(function () {
+      console.log("jQuery is working");
+
+      $("#booksession").on("submit", async function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+        $(".error").text("");
+
+        // Validation
+        const name = $("#name").val().trim();
+        if (name.length === 0 || name.length > 30) {
+          $("#nameError").text("Name must be 1–30 characters.");
+          isValid = false;
+        }
+
+        const reg = $("#registrationNumber").val().trim();
+        const regRegex = /^\d{2}[A-Z]{3}\d{4}$/;
+        if (!regRegex.test(reg)) {
+          $("#regError").text("Format should be 23BIT0311.");
+          isValid = false;
+        }
+
+        const mobile = $("#mobile").val().trim();
+        const mobileRegex = /^\+91\d{10}$/;
+        if (!mobileRegex.test(mobile)) {
+          $("#mobileError").text("Mobile must be in +91XXXXXXXXXX format.");
+          isValid = false;
+        }
+
+        const hostel = $("#hostelBlock").val();
+        if (!hostel) {
+          $("#hostelError").text("Please select your hostel block.");
+          isValid = false;
+        }
+
+        const gender = $("#gender").val();
+        if (!gender) {
+          $("#genderError").text("Please select your gender.");
+          isValid = false;
+        }
+        const timeslot = $("#timeslot").val();
+        if (!timeslot) {
+          $("#timeslotError").text("Please select your timeslot.");
+          isValid = false;
+        }
+
+        const email = $("#email").val().trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          $("#emailError").text("Enter a valid email address.");
+          isValid = false;
+        }
+
+        const age = $("#age").val();
+        if (age < 16 || age > 100) {
+          $("#ageError").text("Age must be between 16 and 100.");
+          isValid = false;
+        }
+
+       
+        if (!isValid) return;
+
+        // If valid, send form data
+        const formData = $(this).serialize();
+
+        $.ajax({
+          type: "POST",
+          url: "/student/booksession",
+          contentType: "application/x-www-form-urlencoded",
+          data: formData
+        });
+      });
+      });
+  </script>
 
 </body>
-
 </html>
