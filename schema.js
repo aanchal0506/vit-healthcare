@@ -48,8 +48,6 @@ const sessionSchema = new mongoose.Schema({
     timeslot: String,
     email: String
   });
-  
-  // Model
   const Session = mongoose.model('Session', sessionSchema);
   
 // Export all models
