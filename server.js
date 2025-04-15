@@ -94,19 +94,27 @@ app.post("/students/signup", async (req, res) => {
 });
 
 // Student Login
-app.post("/students/login", async (req, res) => {
+app.post('/students/login', async (req, res) => {
+    const { registrationNumber, password } = req.body;
+
     try {
-        const { registrationNumber, password } = req.body;
         const student = await Student.findOne({ registrationNumber });
 
-        if (!student) return res.status(404).json({ message: "Student not found" });
-        if (student.password !== password) return res.status(401).json({ message: "Invalid password" });
+        if (!student) {
+            return res.status(404).json({ message: "Student not found. Please sign in." });
+        }
 
-        res.status(200).json({ message: "Login successful", student });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        if (student.password !== password) {
+            return res.status(401).json({ message: "Invalid password. Try again." });
+        }
+
+        res.status(200).json({ message: "Login successful" });
+
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
     }
 });
+
 
 /* Update Student Details
 app.put("/students/update/:regNo", async (req, res) => {
