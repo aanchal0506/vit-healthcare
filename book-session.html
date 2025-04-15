@@ -316,6 +316,11 @@
           $("#timeslotError").text("Please select your timeslot.");
           isValid = false;
         }
+        const doctor_sel = $("#doctor_sel").val();
+        if (!doctor_sel) {
+          $("#doctoerror").text("Please select your doctor.");
+          isValid = false;
+        }
 
         const email = $("#email").val().trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
