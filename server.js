@@ -164,7 +164,7 @@ app.put("/students/update/:regNo", async (req, res) => {
 // });
 app.post("/students/booksession", async (req, res) => {
     try {
-        const { registerNumber, employeeId } = req.body;
+        const { registerNumber, doctor_sel } = req.body;
 
         // 1. Check if the student already booked
         const alreadyBooked = await Session.findOne({ registerNumber });
@@ -173,7 +173,7 @@ app.post("/students/booksession", async (req, res) => {
         }
 
         // 2. Check if the doctor exists and has slots available
-        const doctor = await Doctor.findOne({ employeeId });
+        const doctor = await Doctor.findOne({ doctor_sel });
         if (!doctor) {
             return res.status(404).json({ message: "Doctor not found" });
         }

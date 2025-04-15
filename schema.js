@@ -42,6 +42,7 @@ const sessionSchema = new mongoose.Schema({
     registerNumber: String,
     mobile: String,
     hostelBlock: String,
+    doctor_sel:String,
     gender: String,
     age: Number,
     timeslot: String,
