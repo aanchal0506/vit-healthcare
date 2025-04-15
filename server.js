@@ -144,24 +144,58 @@ app.put("/students/update/:regNo", async (req, res) => {
 
 
 // Book a Doctor Session
-app.post("/doctors/book", async (req, res) => {
-    try {
-        const { employeeId } = req.body;
-        const doctor = await Doctor.findOne({ employeeId });
+// app.post("/doctors/book", async (req, res) => {
+//     try {
+//         const { employeeId } = req.body;
+//         const doctor = await Doctor.findOne({ employeeId });
 
-        if (!doctor) return res.status(404).json({ message: "Doctor not found" });
+//         if (!doctor) return res.status(404).json({ message: "Doctor not found" });
+
+//         if (doctor.bookings >= doctor.maxLimit) {
+//             return res.status(400).json({ message: "Doctor is not available for the selected time slot" });
+//         }
+
+//         doctor.bookings += 1;
+//         await doctor.save();
+//         res.status(200).json({ message: "Session booked successfully", doctor });
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
+app.post("/students/booksession", async (req, res) => {
+    try {
+        const { registerNumber, employeeId } = req.body;
+
+        // 1. Check if the student already booked
+        const alreadyBooked = await Session.findOne({ registerNumber });
+        if (alreadyBooked) {
+            return res.status(400).json({ message: "Student has already booked a session" });
+        }
+
+        // 2. Check if the doctor exists and has slots available
+        const doctor = await Doctor.findOne({ employeeId });
+        if (!doctor) {
+            return res.status(404).json({ message: "Doctor not found" });
+        }
 
         if (doctor.bookings >= doctor.maxLimit) {
             return res.status(400).json({ message: "Doctor is not available for the selected time slot" });
         }
 
+        // 3. Save the student session
+        const newSession = new Session(req.body);
+        await newSession.save();
+
+        // 4. Increment doctor bookings
         doctor.bookings += 1;
         await doctor.save();
-        res.status(200).json({ message: "Session booked successfully", doctor });
+
+        res.status(201).json({ message: "Session booked successfully", session: newSession, doctor });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 // Book an Ambulance with 20-min Time Check
 app.post("/ambulances/book", async (req, res) => {
