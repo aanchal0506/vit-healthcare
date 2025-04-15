@@ -133,7 +133,7 @@
   <div class="container">
     <h2>VIT HEALTHCARE</h2>
 
-    <form id="booksession">
+    <form id="booksession" method="POST" action="/students/booksession">
       <label for="name">Enter your name:</label>
       <input type="text" id="name" name="name" required />
       <span class="error" id="nameError"></span>
@@ -284,18 +284,37 @@
           isValid = false;
         }
 
+        
         if (!isValid) return;
+        const formData = {
+        name: $('#name').val(),
+        registrationNumber: $('#registrationNumber').val(),
+        mobile: $('#mobile').val(),
+        hostelBlock: $('#hostelBlock').val(),
+        doctor_sel: $('#doctor_sel option:selected').text(),
+        gender: $('input[name="gender"]:checked').val(),  // Get selected gender (assuming radio buttons for gender)
+        timeslot: $('#timeslot').val(),  // Get the selected timeslot
+      age: $('#age').val(),  // Get the entered age
+        email: $('#email').val() 
+    };
 
-        // Proceed with sending data
-        const formData = $(this).serialize();
-        $.post("/student/booksession", formData)
-          .done(function () {
-            alert("Booking successful!");
-            $("#booksession")[0].reset();
-          })
-          .fail(function () {
-            alert("Error booking session. Try again.");
-          });
+
+        // If valid, send form data
+        ;
+
+        $.ajax({
+          type: "POST",
+          url: "/students/booksession",
+          contentType: "application/x-www-form-urlencoded",
+          data: formData,
+          success: function (response) {
+            alert(response.message || "booked sucessfully");
+          },
+          error: function (xhr) {
+            const message = xhr.responseJSON?.message || "booking failed.";
+            alert(message);
+          }
+        });
       });
     });
   </script>

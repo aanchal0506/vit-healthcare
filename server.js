@@ -164,11 +164,11 @@ app.put("/students/update/:regNo", async (req, res) => {
 // });
 app.post("/students/booksession", async (req, res) => {
     try {
-        const { registerNumber, doctor_sel } = req.body;
+        const { name, registrationNumber, mobile, hostelBlock, doctor_sel, timeslot } = req.body;
         console.log("Booking data:", req.body);
 
         // 1. Check if the student already booked
-        const alreadyBooked = await Session.findOne({ registerNumber });
+        const alreadyBooked = await Session.findOne({ registrationNumber });
         if (alreadyBooked) {
             return res.status(400).json({ message: "Student has already booked a session" });
         }
@@ -198,7 +198,6 @@ app.post("/students/booksession", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 // Book an Ambulance with 20-min Time Check
 app.post("/ambulances/book", async (req, res) => {

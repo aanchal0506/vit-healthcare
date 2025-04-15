@@ -39,7 +39,7 @@ const ambulanceSchema = new mongoose.Schema({
 const Ambulance = mongoose.model("Ambulance", ambulanceSchema);
 const sessionSchema = new mongoose.Schema({
     name: String,
-    registerNumber: String,
+    registrationNumber: String,
     mobile: String,
     hostelBlock: String,
     doctor_sel:String,
