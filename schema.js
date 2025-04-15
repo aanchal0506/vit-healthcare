@@ -37,6 +37,19 @@ const ambulanceSchema = new mongoose.Schema({
     studentName: String
 }, { collection: 'ambulances' });
 const Ambulance = mongoose.model("Ambulance", ambulanceSchema);
-
+const sessionSchema = new mongoose.Schema({
+    name: String,
+    registerNumber: String,
+    mobile: String,
+    hostelBlock: String,
+    gender: String,
+    age: Number,
+    timeslot: String,
+    email: String
+  });
+  
+  // Model
+  const Session = mongoose.model('Session', sessionSchema);
+  
 // Export all models
-module.exports = { Student, Doctor, Ambulance };
+module.exports = { Student, Doctor, Ambulance,Session };
