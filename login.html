@@ -205,6 +205,7 @@
             <h3>LOGIN</h3>
             <input type="text" id="register_number" placeholder="REGISTER NUMBER">
             <input type="password" id="password" placeholder="PASSWORD">
+            <span id="loginError" style="color: red; display: block; margin-top: 5px;"></span>
 
             <button onclick="authenticateUser()">LOGIN</button>
             <p>
@@ -213,5 +214,40 @@
             </p>
         </div>
     </div>
+    <script>
+        async function authenticateUser() {
+            const reg = document.getElementById("register_number").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorSpan = document.getElementById("loginError");
+            errorSpan.textContent = ""; // Clear previous error message
+    
+            // Frontend validation
+            if (!reg || !password) {
+                errorSpan.textContent = "All fields are required.";
+                return;
+            }
+    
+            try {
+                const res = await fetch("/students/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ registrationNumber: reg, password: password })
+                });
+    
+                const result = await res.json();
+    
+                if (res.ok) {
+                    // Success: redirect to service.html
+                    window.location.href = "/service.html";
+                } else {
+                    // Show specific backend message (like "Student not found" or "Invalid password")
+                    errorSpan.textContent = result.message || "Login failed";
+                }
+            } catch (err) {
+                errorSpan.textContent = "Error: " + err.message;
+            }
+        }
+    </script>
+    
 </body>
 </html>
