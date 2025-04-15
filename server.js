@@ -45,6 +45,12 @@ app.get("/service.html", (req, res) => {
 app.get("/doctor-info", (req, res) => {
     res.sendFile(path.join(__dirname, "doctorinfo.html"));
 });
+app.get("/callambulance", (req, res) => {
+    res.sendFile(path.join(__dirname, "callambulance.html"));
+});
+app.get("/booksession", (req, res) => {
+    res.sendFile(path.join(__dirname, "book-session.html"));
+});
 
 // ====================== API ROUTES ====================== //
 
