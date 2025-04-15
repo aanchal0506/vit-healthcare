@@ -165,6 +165,7 @@ app.put("/students/update/:regNo", async (req, res) => {
 app.post("/students/booksession", async (req, res) => {
     try {
         const { registerNumber, doctor_sel } = req.body;
+        console.log("Booking data:", req.body);
 
         // 1. Check if the student already booked
         const alreadyBooked = await Session.findOne({ registerNumber });
@@ -172,8 +173,9 @@ app.post("/students/booksession", async (req, res) => {
             return res.status(400).json({ message: "Student has already booked a session" });
         }
 
-        
+        // 2. Get doctor info from Doctor collection
         const doctor = await Doctor.findOne({ name: doctor_sel });
+
         if (!doctor) {
             return res.status(404).json({ message: "Doctor not found" });
         }
@@ -182,7 +184,7 @@ app.post("/students/booksession", async (req, res) => {
             return res.status(400).json({ message: "Doctor is not available" });
         }
 
-        // 3. Save the student session
+        // 3. Save the session
         const newSession = new Session(req.body);
         await newSession.save();
 
@@ -192,6 +194,7 @@ app.post("/students/booksession", async (req, res) => {
 
         res.status(201).json({ message: "Session booked successfully", session: newSession, doctor });
     } catch (error) {
+        console.error("Booking error:", error);
         res.status(500).json({ error: error.message });
     }
 });
