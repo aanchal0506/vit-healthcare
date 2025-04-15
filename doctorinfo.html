@@ -143,23 +143,24 @@
     </div>
 
     <div class="container">
+        
         <div class="search-form">
             <h4>Search the Doctor</h4>
             <input type="text" id="searchName" placeholder="Enter Doctor's Name" list="suggestions">
             <datalist id="suggestions"></datalist>
+            <div class="doctor-details" id="doctorDetails">
+                <h4>Doctor Information</h4>
+                <p><strong>Name:</strong> <span id="name"></span></p>
+                <p><strong>Age:</strong> <span id="age"></span></p>
+                <p><strong>Specialization:</strong> <span id="specialization"></span></p>
+                <p><strong>Experience:</strong> <span id="experience"></span> years</p>
+                <p><strong>Working Days:</strong> <span id="workingDays"></span></p>
+                <p><strong>Meeting Hours:</strong> <span id="timeSlot"></span></p>
+            </div>
             <button onclick="searchDoctor()">Search</button>
             <button onclick="searchDoctor()">Back to services</button>
         </div>
-
-        <div class="doctor-details" id="doctorDetails">
-            <h4>Doctor Information</h4>
-            <p><strong>Name:</strong> <span id="name"></span></p>
-            <p><strong>Age:</strong> <span id="age"></span></p>
-            <p><strong>Specialization:</strong> <span id="specialization"></span></p>
-            <p><strong>Experience:</strong> <span id="experience"></span> years</p>
-            <p><strong>Working Days:</strong> <span id="workingDays"></span></p>
-            <p><strong>Meeting Hours:</strong> <span id="timeSlot"></span></p>
-        </div>
+        
     </div>
 
     <script>
