@@ -7,12 +7,12 @@
   <title>VIT Healthcare - Sign Up</title>
   <link rel="stylesheet" href="/styles/signup.css" />
   <style>
-     /* Reset and Base Styles */
- * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
   body {
     font-family: 'Inter', sans-serif;
@@ -25,201 +25,211 @@
     padding: 20px;
     flex-direction: column;
 
-  }
-
-  /* Header */
-  .header {
-    background: linear-gradient(to right, #0f4c75, #3282B8);
-    width: 100%;
-    padding: 2rem 0;
-    /* Increased vertical padding */
-    color: white;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100px;
-    /* Fixed height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-
-  /* Header Title */
-  .header h1 {
-    color: rgb(241, 240, 240);
-    font-size: 50px;
-    /* Unified font size */
-    margin: 0;
-  }
-
-  /* Header Subtext */
-  .header span {
-    font-size: 22px;
-    opacity: 0.9;
-  }
-
-  select {
-    opacity: 0.6;
-    font-size: 16px;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #134d74;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    background-color: white;
-  }
-
-  /* Container */
-  .container {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: center;
-    padding: 50px;
-    margin-top: 100px;
-  }
-
-  /* Form Title */
-  .container h2 {
-    color: #1B262C;
-    margin-bottom: 15px;
-    font-size: 24px;
-  }
-
-  /* Form Inputs */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  label {
-    text-align: left;
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #3282B8;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-
-  .terms-label {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  /* Sign Up Button */
-  button {
-    width: 100%;
-    padding: 12px;
-    background: #0F4C75;
-    color: #BBE1FA;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background 0.3s ease;
-    margin-top: 10px;
-  }
-
-  button:hover {
-    background: #03273f;
-  }
-
-  /* Links */
-  p {
-    font-size: 14px;
-    color: #555;
-    margin-top: 10px;
-  }
-
-  a {
-    color: #0a3553;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* Responsive Design */
-  @media screen and (max-width: 480px) {
-    .container {
-      max-width: 100%;
-      margin-top: 80px;
-      padding: 20px;
     }
 
+    /* Header */
     .header {
-      padding: 8px;
-      font-size: 18px;
-    }
-
-    .header h1 {
-      font-size: 18px;
-    }
-
-    .login-box input,
-    .login-box button {
-      font-size: 14px;
-      padding: 10px;
-    }
-
-    .header span {
-      font-size: 13px;
-    }
-  }
-  
-
-  @media (max-width: 768px) {
-    .header {
-      padding: 10px;
-      font-size: 22px;
-    }
-
-    .header h1 {
-      font-size: 38px;
-    }
-
-  }
-
-
-  @media (max-width: 425px) {
-    .header {
-      padding: 10px;
-      /* Reduce padding */
-      font-size: 16px;
-      /* Decrease font size */
-      height: 80px;
-      /* Set a fixed height */
+      background: linear-gradient(to right, #0f4c75, #3282B8);
+      width: 100%;
+      padding: 2rem 0;
+      /* Increased vertical padding */
+      color: white;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100px;
+      /* Fixed height */
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 20px;
     }
 
+
+    /* Header Title */
     .header h1 {
-      font-size: 24px;
-      /* Reduce text size */
+      color: rgb(241, 240, 240);
+      font-size: 50px;
+      /* Unified font size */
+      margin: 0;
     }
 
+    /* Header Subtext */
+    .header span {
+      font-size: 22px;
+      opacity: 0.9;
+    }
+
+    select {
+      opacity: 0.6;
+      font-size: 16px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #134d74;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      background-color: white;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      padding: 50px;
+      margin-top: 100px;
+    }
+
+    /* Form Title */
+    .container h2 {
+      color: #1B262C;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    /* Form Inputs */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label {
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #3282B8;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .terms-label {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Sign Up Button */
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0F4C75;
+      color: #BBE1FA;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #03273f;
+    }
+
+    /* Links */
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #0a3553;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 480px) {
+      .container {
+        max-width: 100%;
+        margin-top: 80px;
+        padding: 20px;
+      }
+
+      .header {
+        padding: 8px;
+        font-size: 18px;
+      }
+
+      .header h1 {
+        font-size: 18px;
+      }
+
+      .login-box input,
+      .login-box button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .header span {
+        font-size: 13px;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 10px;
+        font-size: 22px;
+      }
+
+      .header h1 {
+        font-size: 38px;
+      }
+
+    }
+
+
+    @media (max-width: 425px) {
+      .header {
+        padding: 10px;
+        /* Reduce padding */
+        font-size: 16px;
+        /* Decrease font size */
+        height: 80px;
+        /* Set a fixed height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .header h1 {
+        font-size: 24px;
+        /* Reduce text size */
+      }
+
+    }
+    @media (max-width: 480px) {
+  body {
+    padding: 10px;
+    align-items: stretch;
   }
-   
+
+  .container {
+    width: 100%;
+  }
+}
+
   </style>
 </head>
 
@@ -236,48 +246,49 @@
       <label for="name">Enter your name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your full name" required />
       <span class="error" id="nameError"></span>
-    
-      <label for=" registrationNumber">Enter your registration number:</label>
-      <input type="text" id="registrationNumber" name="registrationNumber" placeholder="Enter your registration number" required />
+
+      <label for="registrationNumber">Enter your registration number:</label>
+      <input type="text" id="registrationNumber" name="registrationNumber" placeholder="Enter your registration number"
+        required />
       <span class="error" id="regError"></span>
-    
+
       <label for="mobile">Enter your mobile number:</label>
       <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required />
       <span class="error" id="mobileError"></span>
-    
+
       <label for="hostelBlock">Select your hostel block:</label>
-    <select id="hostelBlock" name="hostelBlockk" placeholder="Enter your hostel block"required>
-      <option value="">Select</option>
-      <option value="A-T Men's Hostel">A Men's Hostel</option>
-      <option value="B Men's Hostel">B Men's Hostel</option>
-      <option value="C Men's Hostel">C Men's Hostel</option>
-      <option value="D Men's Hostel">D Men's Hostel</option>
-      <option value="E Men's Hostel">E Men's Hostel</option>
-      <option value="F Men's Hostel">F Men's Hostel</option>
-      <option value="G Men's Hostel">G Men's Hostel</option>
-      <option value="H Men's Hostel">H Men's Hostel</option>
-      <option value="J Men's Hostel">J Men's Hostel</option>
-      <option value="K Men's Hostel">K Men's Hostel</option>
-      <option value="L Men's Hostel">L Men's Hostel</option>
-      <option value="M Men's Hostel">M Men's Hostel</option>
-      <option value="N Men's Hostel">N Men's Hostel</option>
-      <option value="P Men's Hostel">P Men's Hostel</option>
-      <option value="Q Men's Hostel">Q Men's Hostel</option>
-      <option value="R Men's Hostel">R Men's Hostel</option>
-      <option value="S Men's Hostel">S Men's Hostel</option>
-      <option value="T Men's Hostel">T Men's Hostel</option>
-      <option value="A Women's Hostel">A Women's Hostel</option>
-      <option value="B Women's Hostel">B Women's Hostel</option>
-      <option value="C Women's Hostel">C Women's Hostel</option>
-      <option value="D Women's Hostel">D Women's Hostel</option>
-      <option value="E Women's Hostel">E Women's Hostel</option>
-      <option value="F Women's Hostel">F Women's Hostel</option>
-      <option value="G Women's Hostel">G Women's Hostel</option>
-      <option value="H Women's Hostel">H Women's Hostel</option>
-      <option value="J Women's Hostel">J Women's Hostel</option>
-    </select>
-    <span class="error" id="hostelError"></span>
-    
+      <select id="hostelBlock" name="hostelBlock" placeholder="Enter your hostel block" required>
+        <option value="">Select</option>
+        <option value="A-T Men's Hostel">A Men's Hostel</option>
+        <option value="B Men's Hostel">B Men's Hostel</option>
+        <option value="C Men's Hostel">C Men's Hostel</option>
+        <option value="D Men's Hostel">D Men's Hostel</option>
+        <option value="E Men's Hostel">E Men's Hostel</option>
+        <option value="F Men's Hostel">F Men's Hostel</option>
+        <option value="G Men's Hostel">G Men's Hostel</option>
+        <option value="H Men's Hostel">H Men's Hostel</option>
+        <option value="J Men's Hostel">J Men's Hostel</option>
+        <option value="K Men's Hostel">K Men's Hostel</option>
+        <option value="L Men's Hostel">L Men's Hostel</option>
+        <option value="M Men's Hostel">M Men's Hostel</option>
+        <option value="N Men's Hostel">N Men's Hostel</option>
+        <option value="P Men's Hostel">P Men's Hostel</option>
+        <option value="Q Men's Hostel">Q Men's Hostel</option>
+        <option value="R Men's Hostel">R Men's Hostel</option>
+        <option value="S Men's Hostel">S Men's Hostel</option>
+        <option value="T Men's Hostel">T Men's Hostel</option>
+        <option value="A Women's Hostel">A Women's Hostel</option>
+        <option value="B Women's Hostel">B Women's Hostel</option>
+        <option value="C Women's Hostel">C Women's Hostel</option>
+        <option value="D Women's Hostel">D Women's Hostel</option>
+        <option value="E Women's Hostel">E Women's Hostel</option>
+        <option value="F Women's Hostel">F Women's Hostel</option>
+        <option value="G Women's Hostel">G Women's Hostel</option>
+        <option value="H Women's Hostel">H Women's Hostel</option>
+        <option value="J Women's Hostel">J Women's Hostel</option>
+      </select>
+      <span class="error" id="hostelError"></span>
+
       <label for="gender">Select your gender:</label>
       <select id="gender" name="gender" required>
         <option value="">Select</option>
@@ -286,34 +297,33 @@
         <option value="Other">Other</option>
       </select>
       <span class="error" id="genderError"></span>
-    
+
       <label for="email">Enter your email:</label>
       <input type="email" id="email" name="email" placeholder="Enter your email" required />
       <span class="error" id="emailError"></span>
-    
+
       <label for="age">Enter your age:</label>
       <input type="number" id="age" name="age" placeholder="Enter your age" required />
       <span class="error" id="ageError"></span>
-    
+
       <label for="password">Enter your password:</label>
       <input type="password" id="password" name="password" placeholder="Enter your password" required />
       <span class="error" id="passwordError"></span>
-    
+
       <button type="submit">Sign Up</button>
     </form>
     <style>
-    .error {
-      color: red;
-      font-size: 12px;
-      display: block;
-      margin-top: 2px;
-    }
-  </style>
+      .error {
+        color: red;
+        font-size: 12px;
+        display: block;
+        margin-top: 2px;
+      }
+    </style>
 
     <p>Already have an account? <a href="/">Login here</a></p>
   </div>
-
-  <script src="jquery.min.js"></script>
+  
   <script>
     $(document).ready(function () {
       $("#signupForm").on("submit", async function (e) {
@@ -403,9 +413,8 @@
           }
         }
       });
-    });
-  </script>  
-
+    
+  });
+</script>
 </body>
-
 </html>
