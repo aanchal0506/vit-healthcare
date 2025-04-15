@@ -38,6 +38,9 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "login.html"));
 });
+app.get("/service.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "service.html"));
+});
 
 app.get("/doctor-info", (req, res) => {
     res.sendFile(path.join(__dirname, "doctorinfo.html"));
