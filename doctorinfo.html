@@ -143,24 +143,24 @@
     </div>
 
     <div class="container">
+        
         <div class="search-form">
             <h4>Search the Doctor</h4>
             <input type="text" id="searchName" placeholder="Enter Doctor's Name" list="suggestions">
             <datalist id="suggestions"></datalist>
+            <div class="doctor-details" id="doctorDetails">
+                <h4>Doctor Information</h4>
+                <p><strong>Name:</strong> <span id="name"></span></p>
+                <p><strong>Age:</strong> <span id="age"></span></p>
+                <p><strong>Specialization:</strong> <span id="specialization"></span></p>
+                <p><strong>Experience:</strong> <span id="experience"></span> years</p>
+                <p><strong>Working Days:</strong> <span id="workingDays"></span></p>
+                <p><strong>Meeting Hours:</strong> <span id="timeSlot"></span></p>
+            </div>
             <button onclick="searchDoctor()">Search</button>
             <button onclick="searchDoctor()">Back to services</button>
         </div>
-
-        <div class="doctor-details" id="doctorDetails">
-            <h4>Doctor Information</h4>
-            <p><strong>Name:</strong> <span id="docName"></span></p>
-            <p><strong>Age:</strong> <span id="docAge"></span></p>
-            <p><strong>Gender:</strong> <span id="docGender"></span></p>
-            <p><strong>Specialization:</strong> <span id="docSpecialization"></span></p>
-            <p><strong>Experience:</strong> <span id="docExperience"></span> years</p>
-            <p><strong>Working Days:</strong> <span id="docDays"></span></p>
-            <p><strong>Meeting Hours:</strong> <span id="docHours"></span></p>
-        </div>
+        
     </div>
 
     <script>
@@ -179,13 +179,12 @@
                         alert("Doctor not found!");
                         return;
                     }
-                    document.getElementById("docName").innerText = doctor.name;
-                    document.getElementById("docAge").innerText = doctor.age;
-                    document.getElementById("docGender").innerText = doctor.gender;
-                    document.getElementById("docSpecialization").innerText = doctor.specialization;
-                    document.getElementById("docExperience").innerText = doctor.experience;
-                    document.getElementById("docDays").innerText = doctor.days;
-                    document.getElementById("docHours").innerText = doctor.hours;
+                    document.getElementById("name").innerText = doctor.name;
+                    document.getElementById("age").innerText = doctor.age;
+                    document.getElementById("specialization").innerText = doctor.specialization;
+                    document.getElementById("experience").innerText = doctor.experience;
+                    document.getElementById("workingDays").innerText = doctor.workingDays;
+                    document.getElementById("timeSlot").innerText = doctor.timeSlot;
                     document.getElementById("doctorDetails").style.display = "block";
                 })
                 .catch(error => {
