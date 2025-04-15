@@ -95,7 +95,6 @@ app.post("/students/signup", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 // Student Login
 app.post('/students/login', async (req, res) => {
     const { registrationNumber, password } = req.body;
