@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VIT Healthcare - Sign Up</title>
   <link rel="stylesheet" href="/styles/signup.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     /* Reset and Base Styles */
     * {
@@ -14,16 +15,16 @@
       box-sizing: border-box;
     }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: #F1F1F1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /**height: 100vh;*/
-    margin: 0;
-    padding: 20px;
-    flex-direction: column;
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F1F1F1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /**height: 100vh;*/
+      margin: 0;
+      padding: 20px;
+      flex-direction: column;
 
     }
 
@@ -219,17 +220,17 @@
       }
 
     }
+
     @media (max-width: 480px) {
-  body {
-    padding: 10px;
-    align-items: stretch;
-  }
+      body {
+        padding: 10px;
+        align-items: stretch;
+      }
 
-  .container {
-    width: 100%;
-  }
-}
-
+      .container {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -321,100 +322,94 @@
       }
     </style>
 
-    <p>Already have an account? <a href="/">Login here</a></p>
+    <p>Already have an account? <a href="/login">Login here</a></p>
   </div>
-  
+
   <script>
     $(document).ready(function () {
+      console.log("jQuery is working");
+
       $("#signupForm").on("submit", async function (e) {
         e.preventDefault();
-  
+
         let isValid = true;
         $(".error").text("");
-  
-        const form = this;
-  
+
         // Validation
         const name = $("#name").val().trim();
         if (name.length === 0 || name.length > 30) {
           $("#nameError").text("Name must be 1–30 characters.");
           isValid = false;
         }
-  
+
         const reg = $("#registrationNumber").val().trim();
         const regRegex = /^\d{2}[A-Z]{3}\d{4}$/;
         if (!regRegex.test(reg)) {
           $("#regError").text("Format should be 23BIT0311.");
           isValid = false;
         }
-  
+
         const mobile = $("#mobile").val().trim();
         const mobileRegex = /^\+91\d{10}$/;
         if (!mobileRegex.test(mobile)) {
-          $("#mobileError").text("Mobile must start with +91 and be 13 characters.");
+          $("#mobileError").text("Mobile must be in +91XXXXXXXXXX format.");
           isValid = false;
         }
-  
-        if ($("#hostelBlock").val() === "") {
-          $("#hostelError").text("Please select a hostel block.");
+
+        const hostel = $("#hostelBlock").val();
+        if (!hostel) {
+          $("#hostelError").text("Please select your hostel block.");
           isValid = false;
         }
-  
+
         const gender = $("#gender").val();
-        if (gender === "") {
-          $("#genderError").text("Gender is required.");
+        if (!gender) {
+          $("#genderError").text("Please select your gender.");
           isValid = false;
         }
-  
+
         const email = $("#email").val().trim();
-        const emailRegex = /^([a-zA-Z0-9_\.\-])+\@([a-zA-Z0-9\.])+\.([A-Za-z0-9]){2,4}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-          $("#emailError").text("Invalid email format.");
+          $("#emailError").text("Enter a valid email address.");
           isValid = false;
         }
-  
-        const age = parseInt($("#age").val().trim());
-        if (isNaN(age) || age < 16) {
-          $("#ageError").text("Age must be 16 or older.");
+
+        const age = $("#age").val();
+        if (age < 16 || age > 100) {
+          $("#ageError").text("Age must be between 16 and 100.");
           isValid = false;
         }
-  
+
         const password = $("#password").val();
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&]).{1,}$/;
-        if (!passwordRegex.test(password)) {
-          $("#passwordError").text("Password must include uppercase, lowercase, digit, and special char.");
+        if (password.length < 6) {
+          $("#passwordError").text("Password must be at least 6 characters.");
           isValid = false;
         }
-  
-        // Form submission using fetch
-        if (isValid) {
-          const formData = new FormData(form);
-          const data = Object.fromEntries(formData.entries());
-  
-          try {
-            const res = await fetch("/students/signup", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data),
-            });
-  
-            const result = await res.json();
-  
-            if (res.ok) {
-              alert(result.message); // success: "Student registered successfully"
-              form.reset();
-            } else {
-              alert(result.message); // error: "Student already exists"
-            }
-          } catch (err) {
-            alert("Server error: " + err.message);
+
+        if (!isValid) return;
+
+        // If valid, send form data
+        const formData = $(this).serialize();
+
+        $.ajax({
+          type: "POST",
+          url: "/students/signup",
+          contentType: "application/x-www-form-urlencoded",
+          data: formData,
+          success: function (response) {
+            alert(response.message || "Signup successful! Redirecting...");
+            window.location.href = "/service"; // Redirect to /service on success
+          },
+          error: function (xhr) {
+            const message = xhr.responseJSON?.message || "Signup failed.";
+            alert(message);
           }
-        }
+        });
       });
-    
-  });
-</script>
+      });
+  </script>
+
 </body>
+
 </html>
