@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 
-const { Student, Doctor, Ambulance } = require("./schema");
+const { Student, Doctor, Ambulance,Session } = require("./schema");
 
 const app = express();
 const PORT = 5000;
@@ -172,14 +172,14 @@ app.post("/students/booksession", async (req, res) => {
             return res.status(400).json({ message: "Student has already booked a session" });
         }
 
-        // 2. Check if the doctor exists and has slots available
-        const doctor = await Doctor.findOne({ doctor_sel });
+        
+        const doctor = await Doctor.findOne({ name: doctor_sel });
         if (!doctor) {
             return res.status(404).json({ message: "Doctor not found" });
         }
 
         if (doctor.bookings >= doctor.maxLimit) {
-            return res.status(400).json({ message: "Doctor is not available for the selected time slot" });
+            return res.status(400).json({ message: "Doctor is not available" });
         }
 
         // 3. Save the student session
