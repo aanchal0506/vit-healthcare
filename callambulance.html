@@ -175,54 +175,72 @@
     </div>
   </header>
 
-  <div class="container">
+  <div class="container" method="POST" action="/ambulances/book">
     <h2>BOOK AN AMBULANCE</h2> 
-    <form id="signupForm">
-      <label for="fullname">Enter your name:</label>
-      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required />
-      <label for="hostel_block">Select venue:</label>
-      <select id="hostel_block" name="hostel_block" required>
+    <form id="ambulancebook">
+      <label for="studentName">Enter your name:</label>
+      <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required />
+      <label for="pickupAddress">Select venue:</label>
+      <select id="pickupAddress" name="pickupAddress" required>
         <option value="">Select</option>
-        <option value="A-T Men's Hostel">A Men's Hostel</option>
-        <option value="A-T Men's Hostel">B Men's Hostel</option>
-        <option value="A-T Men's Hostel">C Men's Hostel</option>
-        <option value="A-T Men's Hostel">D Men's Hostel</option>
-        <option value="A-T Men's Hostel">E Men's Hostel</option>
-        <option value="A-T Men's Hostel">F Men's Hostel</option>
-        <option value="A-T Men's Hostel">G Men's Hostel</option>
-        <option value="A-T Men's Hostel">H Men's Hostel</option>
-        <option value="A-T Men's Hostel">J Men's Hostel</option>
-        <option value="A-T Men's Hostel">K Men's Hostel</option>
-        <option value="A-T Men's Hostel">L Men's Hostel</option>
-        <option value="A-T Men's Hostel">M Men's Hostel</option>
-        <option value="A-T Men's Hostel">N Men's Hostel</option>
-        <option value="A-T Men's Hostel">P Men's Hostel</option>
-        <option value="A-T Men's Hostel">Q Men's Hostel</option>
-        <option value="A-T Men's Hostel">R Men's Hostel</option>
-        <option value="A-T Men's Hostel">S Men's Hostel</option>
-        <option value="A-T Men's Hostel">T Men's Hostel</option>
-        <option value="A-T Men's Hostel">A Women's Hostel</option>
-        <option value="A-T Men's Hostel">B Women's Hostel</option>
-        <option value="A-T Men's Hostel">C Women's Hostel</option>
-        <option value="A-T Men's Hostel">D Women's Hostel</option>
-        <option value="A-T Men's Hostel">E Women's Hostel</option>
-        <option value="A-T Men's Hostel">F Women's Hostel</option>
-        <option value="A-T Men's Hostel">G Women's Hostel</option>
-        <option value="A-T Men's Hostel">H Women's Hostel</option>
-        <option value="A-T Men's Hostel">J Women's Hostel</option>
-        <option value="A-T Men's Hostel">GDN</option>
-        <option value="A-T Men's Hostel">MGB</option>
-        <option value="A-T Men's Hostel">TT</option>
-        <option value="A-T Men's Hostel">SJT</option>
-        <option value="A-T Men's Hostel">MGR</option>
-        <option value="A-T Men's Hostel">CDMM</option>
-        <option value="A-T Men's Hostel">PRP</option>
-        <option value="A-T Men's Hostel">SMV</option>
+        <option value="A">A Men's Hostel</option>
+        <option value="B">B Men's Hostel</option>
+        <option value="C">C Men's Hostel</option>
+        <option value="D">D Men's Hostel</option>
+        <option value="E">E Men's Hostel</option>
+        <option value="F">F Men's Hostel</option>
+        <option value="G">G Men's Hostel</option>
+        <option value="H">H Men's Hostel</option>
+        <option value="J">J Men's Hostel</option>
+        <option value="K">K Men's Hostel</option>
+        <option value="L">L Men's Hostel</option>
+        <option value="M">M Men's Hostel</option>
+        <option value="N">N Men's Hostel</option>
+        <option value="P">P Men's Hostel</option>
+        <option value="Q">Q Men's Hostel</option>
+        <option value="R">R Men's Hostel</option>
+        <option value="S">S Men's Hostel</option>
+        <option value="T">T Men's Hostel</option>
+        <option value="AW">A Women's Hostel</option>
+        <option value="BW">B Women's Hostel</option>
+        <option value="CW">C Women's Hostel</option>
+        <option value="DW">D Women's Hostel</option>
+        <option value="EW">E Women's Hostel</option>
+        <option value="FW">F Women's Hostel</option>
+        <option value="GW">G Women's Hostel</option>
+        <option value="HW">H Women's Hostel</option>
+        <option value="JW">J Women's Hostel</option>
       </select>
         <button type="submit">BOOK IT!</button>
         <button onclick="window.location.href='/service'">Back to Services</button>
     </form>
   </div>
+  <script>
+    
+  $(document).ready(function () {
+    $("#ambulancebook").submit(function (event) {
+      event.preventDefault();
+
+      const studentName = $("#studentName").val();
+      const pickupAddress = $('#pickupAddress option:selected').text();
+
+      $.ajax({
+        url: "/ambulances/book",
+        type: "POST",
+        data: JSON.stringify({ studentName, pickupAddress }),
+        contentType: "application/json",
+        success: function (response) {
+          alert("Ambulance Booked Successfully. Driver will be assigned shortly.");
+          // You can implement real-time notification here using WebSockets (Socket.io)
+        },
+        error: function (error) {
+          alert("Error: " + error.responseJSON.message);
+        }
+      });
+    });
+  });
+
+  </script>
 </body>
 
 </html>
