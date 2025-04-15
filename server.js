@@ -21,8 +21,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/vit_health", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB Connection Error:", err));
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.error("MongoDB Connection Error:", err));
 
 // ROUTES
 
@@ -93,7 +93,22 @@ app.post("/students/signup", async (req, res) => {
     }
 });
 
-// Update Student Details
+// Student Login
+app.post("/students/login", async (req, res) => {
+    try {
+        const { registrationNumber, password } = req.body;
+        const student = await Student.findOne({ registrationNumber });
+
+        if (!student) return res.status(404).json({ message: "Student not found" });
+        if (student.password !== password) return res.status(401).json({ message: "Invalid password" });
+
+        res.status(200).json({ message: "Login successful", student });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+/* Update Student Details
 app.put("/students/update/:regNo", async (req, res) => {
     try {
         const updatedStudent = await Student.findOneAndUpdate(
@@ -109,6 +124,8 @@ app.put("/students/update/:regNo", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+*/
+
 
 // Book a Doctor Session
 app.post("/doctors/book", async (req, res) => {
