@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // Student Schema
 const studentSchema = new mongoose.Schema({
     name: String,
-    registrationNumber: String,
+    registrationNumber: { type: String, unique: true },
     mobile: String,
     hostelBlock: String,
     gender: String,
