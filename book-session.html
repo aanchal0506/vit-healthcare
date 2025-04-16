@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,8 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-
-    body {
+  body {
       font-family: 'Inter', sans-serif;
       background: #F1F1F1;
       display: flex;
@@ -23,8 +21,7 @@
       padding: 140px 20px 20px;
       height: 100%;
     }
-
-    .header {
+  .header {
       background: linear-gradient(to right, #0f4c75, #3282B8);
       width: 100%;
       padding: 2rem 0;
@@ -39,19 +36,17 @@
       justify-content: center;
       z-index: 1000;
     }
-
-    .header h1 {
+  .header h1 {
       color: rgb(241, 240, 240);
       font-size: 50px;
       margin: 0;
     }
 
-    .header span {
+  .header span {
       font-size: 22px;
       opacity: 0.9;
     }
-
-    .container {
+  .container {
       width: 100%;
       max-width: 600px;
       background: white;
@@ -61,28 +56,23 @@
       text-align: center;
       margin: 0 auto 20px auto;
     }
-
-    .container h2 {
+  .container h2 {
       color: #1B262C;
       margin-bottom: 15px;
       font-size: 24px;
     }
-
-    form {
+  form {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-
-    label {
+  label {
       text-align: left;
       font-size: 14px;
       font-weight: 600;
       color: #555;
     }
-
-    input,
-    select {
+  input,select {
       width: 100%;
       padding: 10px;
       border: 1px solid #3282B8;
@@ -90,14 +80,12 @@
       font-size: 14px;
       opacity: 0.9;
     }
-
-    .error {
+  .error {
       color: red;
       font-size: 12px;
       text-align: left;
     }
-
-    button {
+  button {
       width: 100%;
       padding: 12px;
       background: #0F4C75;
@@ -110,19 +98,16 @@
       transition: background 0.3s ease;
       margin-top: 20px;
     }
-
-    button:hover {
+  button:hover {
       background: #03273f;
     }
-
-    @media (max-width: 480px) {
+  @media (max-width: 480px) {
       .header h1 {
         font-size: 24px;
       }
     }
   </style>
 </head>
-
 <body>
   <header>
     <div class="header">
@@ -178,7 +163,6 @@
         <option value="JW">J Women's Hostel</option>
       </select>
       <span class="error" id="hostelError"></span>
-
       <label for="doctor_sel">Select the doctor:</label>
       <select id="doctor_sel" name="doctor_sel" required>
         <option value="">Select</option>
@@ -194,7 +178,6 @@
         <option value="Vikram Patel">Dr. Vikram Patel</option>
       </select>
       <span class="error" id="doctoerror"></span>
-
       <label for="gender">Select your gender:</label>
       <select id="gender" name="gender" required>
         <option value="">Select</option>
@@ -203,22 +186,18 @@
         <option value="Other">Other</option>
       </select>
       <span class="error" id="genderError"></span>
-
       <label for="age">Enter your age:</label>
       <input type="number" id="age" name="age" required />
       <span class="error" id="ageError"></span>
-
       <label for="timeslot">Select your time slot:</label>
       <select id="timeslot" name="timeslot" required>
-        <option value="">Select</option>
-        <option value="Evening">6:00pm - 8:00pm</option>
+      <option value="">Select</option>
+      <option value="Evening">6:00pm - 8:00pm</option>
       </select>
       <span class="error" id="timeslotError"></span>
-
       <label for="email">Enter your email:</label>
       <input type="email" id="email" name="email" required />
       <span class="error" id="emailError"></span>
-
       <button type="submit">Book your session!</button>
       <button type="button" onclick="window.location.href='/service'">Back to Services</button>
     </form>
@@ -228,65 +207,53 @@
     $(document).ready(function () {
       $("#booksession").on("submit", function (e) {
         e.preventDefault();
-      
         let isValid = true;
         $(".error").text("");
-
         const name = $("#name").val().trim();
         if (name.length === 0 || name.length > 30) {
           $("#nameError").text("Name must be 1–30 characters.");
           isValid = false;
         }
-
         const reg = $("#registrationNumber").val().trim();
         const regRegex = /^\d{2}[A-Z]{3}\d{4}$/;
         if (!regRegex.test(reg)) {
           $("#regError").text("Format should be 23BIT0311.");
           isValid = false;
         }
-
         const mobile = $("#mobile").val().trim();
         const mobileRegex = /^\+91\d{10}$/;
         if (!mobileRegex.test(mobile)) {
           $("#mobileError").text("Mobile must be in +91XXXXXXXXXX format.");
           isValid = false;
         }
-
         if (!$("#hostelBlock").val()) {
           $("#hostelError").text("Please select your hostel block.");
           isValid = false;
         }
-
         if (!$("#doctor_sel").val()) {
           $("#doctoerror").text("Please select your doctor.");
           isValid = false;
         }
-
         if (!$("#gender").val()) {
           $("#genderError").text("Please select your gender.");
           isValid = false;
         }
-
         if (!$("#timeslot").val()) {
           $("#timeslotError").text("Please select your timeslot.");
           isValid = false;
         }
-
         const age = parseInt($("#age").val(), 10);
         if (isNaN(age) || age < 16 || age > 100) {
           $("#ageError").text("Age must be between 16 and 100.");
           isValid = false;
         }
-
         const email = $("#email").val().trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
           $("#emailError").text("Enter a valid email address.");
           isValid = false;
         }
-
-        
-        if (!isValid) return;
+      if (!isValid) return;
         const formData = {
         name: $('#name').val(),
         registrationNumber: $('#registrationNumber').val(),
@@ -301,7 +268,7 @@
 
 
         // If valid, send form data
-        ;
+        
 
         $.ajax({
           type: "POST",

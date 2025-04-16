@@ -1,4 +1,4 @@
-    // schema.js
+
     const mongoose = require("mongoose");
 
     // Student Schema

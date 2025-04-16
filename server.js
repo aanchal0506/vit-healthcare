@@ -132,7 +132,7 @@ app.post('/students/login', async (req, res) => {
         res.cookie("user", registrationNumber, {
             httpOnly: true,  // cannot be accessed by JavaScript
             secure: false,   // set true if using HTTPS
-            maxAge: 60 * 15 * 1000, // 1 hour
+            maxAge: 60 * 15 * 1000, // 
             sameSite: "lax",
         });
         res.status(200).json({ message: "Login successful" });

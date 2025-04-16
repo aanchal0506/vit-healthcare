@@ -238,7 +238,7 @@
                 const result = await res.json();
     
                 if (res.ok) {
-                    // Success: redirect to service.html
+                    
                     document.cookie = `user=${reg}; path=/; max-age=3600`;
                     window.location.href = "/service";
                 } else {
