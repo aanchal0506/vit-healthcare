@@ -245,10 +245,10 @@ app.post("/ambulances/book", async (req, res) => {
         availableAmbulance.pickupAddress = pickupAddress;
         await availableAmbulance.save();
 
-        res.status(200).json({ message: "Ambulance booked successfully", driver: {
-            driverName: driver.driverName,
-            timeOfBooking: driver.timeOfBooking,
-            rtoNumber: driver.rtoNumber
+        res.status(200).json({ message: "Ambulance booked successfully",  availableAmbulance: {
+            driverName:  availableAmbulance.driverName,
+            timeOfBooking:  availableAmbulance.timeOfBooking,
+            rtoNumber:  availableAmbulance.rtoNumber
         }, ambulance: availableAmbulance });
     } catch (error) {
         res.status(500).json({ error: error.message });

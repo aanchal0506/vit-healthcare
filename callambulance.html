@@ -175,9 +175,9 @@
     </div>
   </header>
 
-  <div class="container" method="POST" action="/ambulances/book">
+  <div class="container" >
     <h2>BOOK AN AMBULANCE</h2> 
-    <form id="ambulancebook">
+    <form id="ambulancebook" method="POST" action="/ambulances/book">
       <label for="studentName">Enter your name:</label>
       <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required />
       <label for="pickupAddress">Select venue:</label>
