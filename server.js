@@ -15,7 +15,7 @@ app.use(ses({
     secret: 'your-secret-key', // change this to a strong random string
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 1000 * 60 * 60 } // 1 hour (set secure: true if using HTTPS)
+    cookie: { secure: false, maxAge: 1000 * 60 * 15 } 
 }));
 // Middleware
 app.use(cors());
@@ -114,9 +114,10 @@ function isLoggedIn(req, res, next) {
     if (req.session.student) {
         next();
     } else {
-        res.redirect("/login"); // or res.status(401).json({ message: "Unauthorized" })
+        res.redirect("/login");
     }
-}app.get("/service", isLoggedIn, (req, res) => {
+}
+app.get("/service", isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "service.html"));
 });
 
