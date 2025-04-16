@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
         
-        // Calculate scroll percentage
+        // Calculate scroll percentxage
         const scrollPercentage = scrollPosition / (documentHeight - windowHeight);
         
         // Update background position for gradient effect
