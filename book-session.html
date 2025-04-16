@@ -133,7 +133,7 @@
   <div class="container">
     <h2>VIT HEALTHCARE</h2>
 
-    <form id="booksession" method="POST" action="/students/booksession">
+    <form id="booksession" method="POST" action="/sessions/booksession">
       <label for="name">Enter your name:</label>
       <input type="text" id="name" name="name" required />
       <span class="error" id="nameError"></span>
@@ -228,6 +228,7 @@
     $(document).ready(function () {
       $("#booksession").on("submit", function (e) {
         e.preventDefault();
+      
         let isValid = true;
         $(".error").text("");
 
@@ -304,11 +305,12 @@
 
         $.ajax({
           type: "POST",
-          url: "/students/booksession",
+          url: "/sessions/booksession",
           contentType: "application/x-www-form-urlencoded",
           data: formData,
           success: function (response) {
             alert(response.message || "booked sucessfully");
+            $("#booksession")[0].reset();
           },
           error: function (xhr) {
             const message = xhr.responseJSON?.message || "booking failed.";

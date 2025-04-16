@@ -47,7 +47,7 @@ const sessionSchema = new mongoose.Schema({
     age: Number,
     timeslot: String,
     email: String
-  });
+  },{collection:'sessions'});
   const Session = mongoose.model('Session', sessionSchema);
   
 // Export all models
