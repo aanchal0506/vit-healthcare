@@ -229,6 +229,7 @@ app.post("/ambulances/book", async (req, res) => {
         const { studentName, pickupAddress } = req.body;
         const currentTime = new Date();
 
+        // Find an available ambulance: unbooked or expired
         const availableAmbulance = await Ambulance.findOne({
             $or: [
                 { timeOfBooking: null },
@@ -240,20 +241,37 @@ app.post("/ambulances/book", async (req, res) => {
             return res.status(400).json({ message: "No ambulances available at this time." });
         }
 
+        // If the previous booking has expired, reset the fields
+        if (
+            availableAmbulance.timeOfBooking &&
+            new Date(availableAmbulance.timeOfBooking) < new Date(currentTime - 20 * 60000)
+        ) {
+            availableAmbulance.studentName = null;
+            availableAmbulance.pickupAddress = null;
+        }
+
+        // Assign new booking
         availableAmbulance.timeOfBooking = currentTime;
         availableAmbulance.studentName = studentName;
         availableAmbulance.pickupAddress = pickupAddress;
+
         await availableAmbulance.save();
 
-        res.status(200).json({ message: "Ambulance booked successfully", driver: {
-            driverName: driver.driverName,
-            timeOfBooking: driver.timeOfBooking,
-            rtoNumber: driver.rtoNumber
-        }, ambulance: availableAmbulance });
+        res.status(200).json({
+            message: "Ambulance booked successfully",
+            driver: {
+                driverName: availableAmbulance.driverName,
+                timeOfBooking: availableAmbulance.timeOfBooking,
+                rtoNumber: availableAmbulance.rtoNumber
+            },
+            ambulance: availableAmbulance
+        });
+
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 // ====================== Start Server ====================== //
 app.listen(PORT, () => {
