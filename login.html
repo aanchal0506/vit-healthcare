@@ -231,7 +231,8 @@
                 const res = await fetch("/students/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ registrationNumber: reg, password: password })
+                    body: JSON.stringify({ registrationNumber: reg, password: password }),
+                    credentials: "include"
                 });
     
                 const result = await res.json();

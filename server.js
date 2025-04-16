@@ -3,12 +3,20 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const ses = require("express-session");
 
 const { Student, Doctor, Ambulance,Session } = require("./schema");
 
 const app = express();
 const PORT = 5000;
 
+
+app.use(ses({
+    secret: 'your-secret-key', // change this to a strong random string
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 } // 1 hour (set secure: true if using HTTPS)
+}));
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -102,6 +110,16 @@ app.post("/students/signup", async (req, res) => {
     }
 });
 // Student Login
+function isLoggedIn(req, res, next) {
+    if (req.session.student) {
+        next();
+    } else {
+        res.redirect("/login"); // or res.status(401).json({ message: "Unauthorized" })
+    }
+}app.get("/service", isLoggedIn, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "service.html"));
+});
+
 app.post('/students/login', async (req, res) => {
     const { registrationNumber, password } = req.body;
 
@@ -115,6 +133,11 @@ app.post('/students/login', async (req, res) => {
         if (student.password !== password) {
             return res.status(401).json({ message: "Invalid password. Try again." });
         }
+        req.session.student = {
+            id: student._id,
+            registrationNumber: student.registrationNumber,
+            name: student.name
+        };
 
         res.status(200).json({ message: "Login successful" });
 
@@ -162,7 +185,7 @@ app.put("/students/update/:regNo", async (req, res) => {
 //         res.status(500).json({ error: error.message });
 //     }
 // });
-app.post("/students/booksession", async (req, res) => {
+app.post("/sessions/booksession", async (req, res) => {
     try {
         const { name, registrationNumber, mobile, hostelBlock, doctor_sel, timeslot } = req.body;
         console.log("Booking data:", req.body);
