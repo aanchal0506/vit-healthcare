@@ -4,20 +4,19 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const ses = require("express-session");
-
+const cookieParser = require("cookie-parser");
 const { Student, Doctor, Ambulance,Session } = require("./schema");
 
 const app = express();
 const PORT = 5000;
-
-
+//middleware
+app.use(cookieParser());
 app.use(ses({
-    secret: 'your-secret-key', // change this to a strong random string
+    secret: 'secretkey', 
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false, maxAge: 1000 * 60 * 15 } 
 }));
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
@@ -110,16 +109,7 @@ app.post("/students/signup", async (req, res) => {
     }
 });
 // Student Login
-function isLoggedIn(req, res, next) {
-    if (req.session.student) {
-        next();
-    } else {
-        res.redirect("/login");
-    }
-}
-app.get("/service", isLoggedIn, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "service.html"));
-});
+
 
 app.post('/students/login', async (req, res) => {
     const { registrationNumber, password } = req.body;
@@ -139,14 +129,28 @@ app.post('/students/login', async (req, res) => {
             registrationNumber: student.registrationNumber,
             name: student.name
         };
-
+        res.cookie("user", registrationNumber, {
+            httpOnly: true,  // cannot be accessed by JavaScript
+            secure: false,   // set true if using HTTPS
+            maxAge: 60 * 15 * 1000, // 1 hour
+            sameSite: "lax",
+        });
         res.status(200).json({ message: "Login successful" });
 
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
 });
-
+function isLoggedIn(req, res, next) {
+    if (req.session.student) {
+        next();
+    } else {
+        res.redirect("/login");
+    }
+}
+app.get("/service", isLoggedIn, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "service.html"));
+});
 
 /* Update Student Details
 app.put("/students/update/:regNo", async (req, res) => {
