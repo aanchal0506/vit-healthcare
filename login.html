@@ -249,22 +249,6 @@
                 errorSpan.textContent = "Error: " + err.message;
             }
         }
-        function checkLogin() {
-    const cookies = document.cookie.split("; ");
-    const userCookie = cookies.find(cookie => cookie.startsWith("user="));
-
-    if (userCookie) {
-        const user = userCookie.split("=")[1];
-        console.log("Logged in user:", user); // For debugging
-        // You can now display user information or proceed with logged-in operations
-    } else {
-        window.location.href = "/login"; // Redirect to login page if not logged in
-    }
-}
-
-// Call checkLogin function when the page loads
-checkLogin();
-
     </script>
     
 </body>
