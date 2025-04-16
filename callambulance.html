@@ -211,6 +211,12 @@
         <option value="HW">H Women's Hostel</option>
         <option value="JW">J Women's Hostel</option>
       </select>
+      <div id="driverInfo" style="margin-top: 20px; display: none;">
+        <h3>Assigned Driver Details:</h3>
+        <p><strong>Name:</strong> <span id="driverName"></span></p>
+        <p><strong>Time of Booking:</strong> <span id="timeOfBooking"></span></p>
+        <p><strong>Vehicle Number:</strong> <span id="rtoNumber"></span></p>
+      </div>
         <button type="submit">BOOK IT!</button>
         <button onclick="window.location.href='/service'">Back to Services</button>
     </form>
@@ -231,7 +237,11 @@
         contentType: "application/json",
         success: function (response) {
           alert("Ambulance Booked Successfully. Driver will be assigned shortly.");
-          
+          // Show driver info
+        $("#driverName").text(response.driver.driverName);
+        $("#timeOfBooking").text(response.driver.timeOfBooking);
+        $("#rtoNumber").text(response.driver.rtoNumbers);
+        $("#driverInfo").slideDown();
         },
         error: function (error) {
           alert("Error: " + error.responseJSON.message);
