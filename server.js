@@ -257,7 +257,6 @@ app.post("/ambulances/book", async (req, res) => {
 
         await availableAmbulance.save();
 
-<<<<<<< HEAD
         res.status(200).json({
             message: "Ambulance booked successfully",
             driver: {
@@ -268,13 +267,6 @@ app.post("/ambulances/book", async (req, res) => {
             ambulance: availableAmbulance
         });
 
-=======
-        res.status(200).json({ message: "Ambulance booked successfully",  availableAmbulance: {
-            driverName:  availableAmbulance.driverName,
-            timeOfBooking:  availableAmbulance.timeOfBooking,
-            rtoNumber:  availableAmbulance.rtoNumber
-        }, ambulance: availableAmbulance });
->>>>>>> 2321e37ef7be6fac89a32d6696546b74484d063d
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
