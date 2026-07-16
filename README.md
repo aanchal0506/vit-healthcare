@@ -52,8 +52,4 @@ The system reduces dependency on manual coordination and improves accessibility,
 - Integration with notification services (SMS/Email)  
 - Enhanced data security and audit logging  
 
----
 
-## Author
-Pranshu Agarwal  
-Full-Stack Development, Web Applications  
