@@ -50,6 +50,10 @@ The system reduces dependency on manual coordination and improves accessibility,
 - Role-based access for doctors and administrators  
 - Appointment analytics and reporting  
 - Integration with notification services (SMS/Email)  
-- Enhanced data security and audit logging  
+- Enhanced data security and audit logging
+
+## Author
+- Aanchal Ladha 
+- Pranshu Agarwal
 
 
